@@ -1,0 +1,8 @@
+[
+  {
+    "doc_id": 0,
+    "path": "docs/sample.txt",
+    "chunk_id": 0,
+    "text": "This is a sample document about Colab and RAG. You can add multiple paragraphs here. The chatbot should retrieve relevant chunks and answer questions based on this document."
+  }
+]

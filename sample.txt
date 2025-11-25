@@ -1,0 +1,1 @@
+This is a sample document about Colab and RAG. You can add multiple paragraphs here. The chatbot should retrieve relevant chunks and answer questions based on this document.
