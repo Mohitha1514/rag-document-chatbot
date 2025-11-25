@@ -9,44 +9,47 @@ A Retrieval-Augmented Generation (RAG) chatbot using **Hugging Face**, **FAISS**
 ---
 
 ## 🚀 Live Demo  
-🔗 **Temporary Gradio Link (from Google Colab):**  
-`https://YOUR-GRADIO-LINK-HERE.gradio.live`
+🔗 **Temporary Gradio Link (Colab):**  
+`https://aa84b415606fb50cac.gradio.live/`
 
-🔗 **Hugging Face Spaces Demo (Coming Soon)**
+🔗 **Hugging Face Spaces Demo:**  
+*(Coming soon)*
 
 ---
 
 ## 🧠 Overview  
-This project implements a **RAG pipeline**, allowing a user to ask questions based on the content of uploaded documents.
+This chatbot answers questions grounded **directly from your documents** using a Retrieval-Augmented Generation (RAG) pipeline.
 
-It works through:
-- **Chunking text documents**
-- **Creating embeddings using MiniLM**
-- **Searching similar text using FAISS**
-- **Answer generation using FLAN-T5**
-- **A user-friendly Gradio interface**
+### It works in 3 steps:
+1️⃣ **Retrieve** → Find relevant document chunks using FAISS  
+2️⃣ **Augment** → Pass retrieved data into the model  
+3️⃣ **Generate** → FLAN-T5 creates the final answer  
 
-This ensures responses are **grounded in your document context**, reducing hallucinations.
+This reduces hallucination and ensures high accuracy.
 
 ---
 
 ## 🏗️ Architecture  
 
-Documents → Chunking → Embeddings → FAISS Index → Retriever → FLAN-T5 → Answer
+Documents → Chunking → Embeddings (MiniLM) → FAISS Vector Search → FLAN-T5 → Answer
+
+yaml
+Copy code
 
 ---
 
-## 🛠️ Tech Stack  
-- Python  
+## 🛠️ Tech Stack
+
+### **Core Libraries**
 - Hugging Face Transformers  
 - Sentence Transformers  
-- FAISS  
+- FAISS (Vector Search DB)  
 - Gradio  
 - PyTorch  
 
-**Models Used:**  
-- Embeddings: `sentence-transformers/all-MiniLM-L6-v2`  
-- Generator: `google/flan-t5-small`  
+### **Models Used**
+- **Embedding Model:** all-MiniLM-L6-v2  
+- **Generator Model:** FLAN-T5-small  
 
 ---
 
@@ -54,34 +57,38 @@ Documents → Chunking → Embeddings → FAISS Index → Retriever → FLAN-T5 
 
 rag-document-chatbot/
 │
-├── app.py # Main Gradio chatbot UI
-├── ingest_index.py # Builds FAISS index from docs
+├── app.py # Gradio chatbot UI
+├── ingest_index.py # Builds FAISS vector index
 ├── requirements.txt # Dependencies
 ├── README.md # Documentation
-├── meta.json # Chunk metadata
-├── vector.index # FAISS vector index (generated)
+├── meta.json # Chunk metadata (auto-generated)
+├── vector.index # FAISS index (auto-generated)
 │
-├── docs/ # Your documents go here
+├── docs/ # Input documents
 │ └── sample.txt
 │
-├── .gradio/ # Auto-created
+├── .gradio/ # Auto-created by Gradio
 └── pycache/ # Auto-created
+
+yaml
+Copy code
 
 ---
 
-## ▶️ How to Run the Project
+## ▶️ How to Run Locally
 
-### 1️⃣ Install dependencies
+### **1️⃣ Install dependencies**
 ```bash
 pip install -r requirements.txt
 2️⃣ Add your documents
+Place .txt or .md files inside:
 
-Place .txt or .md files inside the docs/ folder.
-
-3️⃣ Build the vector index
+Copy code
+docs/
+3️⃣ Build FAISS index
+bash
+Copy code
 python ingest_index.py --docs docs
-
-
 This generates:
 
 vector.index
@@ -89,7 +96,30 @@ vector.index
 meta.json
 
 4️⃣ Run the chatbot
+bash
+Copy code
 python app.py
+Open the Gradio link shown (example: http://localhost:7860)
 
+🧪 Features
+✔ Uses your own documents
+✔ Fast vector search using FAISS
+✔ Context-grounded answers
+✔ Lightweight & easy to run
+✔ Beginner-friendly RAG pipeline
 
-Open the Gradio link (usually http://localhost:7860).
+🔮 Future Enhancements
+PDF ingestion (pdfplumber)
+
+Reranker for improved accuracy
+
+Multi-document chat history
+
+Mistral / Llama-3 upgrade
+
+Hugging Face Spaces deployment
+
+👤 Author
+Mohitha Papudesi
+🔗 GitHub: https://github.com/Mohitha1514
+🔗 LinkedIn: (https://www.linkedin.com/in/mohitha-papudesi)
